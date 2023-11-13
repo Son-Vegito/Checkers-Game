@@ -1,5 +1,5 @@
 import pygame
-from .constants import RED,SQUARE_SIZE,GREEN
+from .constants import RED,SQUARE_SIZE,GREEN,CROWN
 
 class Piece:
     PADDING=8
@@ -31,6 +31,8 @@ class Piece:
         radius=(SQUARE_SIZE//2-self.PADDING)
         # pygame.draw.circle(win,GREEN,(self.x,self.y),radius+self.OUTLINE)
         pygame.draw.circle(win,self.colour,(self.x,self.y),radius)
+        if(self.king):
+            win.blit(CROWN,(self.x -CROWN.get_width()//2,self.y-CROWN.get_height()//2))
         
     def __repr__(self):
         return str(self.colour)

@@ -10,3 +10,5 @@ WHITE=(255,255,255)
 BLACK=(0,0,0)
 BLUE=(0,0,255)
 GREEN=(1,50,32)
+
+CROWN = pygame.transform.scale(pygame.image.load("Checkers-Game/checkers/assets/crown.png"),(45,25))
