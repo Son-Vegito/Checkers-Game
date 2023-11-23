@@ -2,7 +2,7 @@ import pygame
 from checkers.constants import WIDTH,HEIGHT,SQUARE_SIZE
 from checkers.game import Game
 
-FPS=30
+FPS=60
 
 WIN=pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption('Checkers')
@@ -21,7 +21,9 @@ def main():
     
     while run:
         clock.tick(FPS)
-        
+        if game.winner() != None:
+            run=False
+            
         for event  in pygame.event.get():
             if event.type == pygame.QUIT:
                 run=False
@@ -29,6 +31,7 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos=pygame.mouse.get_pos()
                 row,col=get_row_col_from_mouse(pos)
+                game.select(row,col)
             
         game.update()
         
