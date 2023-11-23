@@ -6,7 +6,7 @@ class Board:
     def __init__(self):
         self.board = []
         self.red_left=self.white_left=12    # number of pieces
-        self.red_kings=self.white_king=0    # number of kings
+        self.red_kings=self.white_kings=0    # number of kings
         self.create_board()
         
     def draw_squares(self,win):
@@ -15,6 +15,18 @@ class Board:
             for col in range(row%2, ROWS, 2):
                 pygame.draw.rect(win,GREEN,(row*SQUARE_SIZE,col*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE))
                 
+                
+    def evaluate(self):
+        return self.white_left - self.red_left +self.white_kings - self.red_kings
+    
+    def get_all_pieces(self,colour):
+        pieces=[]
+        for row in self.board:
+            for piece in row:
+                if piece !=0 and piece.colour==colour:
+                    pieces.append(piece)
+        return pieces
+                
     def move(self,piece,row,col):
         self.board[piece.row][piece.col],self.board[row][col]=self.board[row][col],self.board[piece.row][piece.col]
         piece.move(row,col)
@@ -22,7 +34,7 @@ class Board:
         if row == 0 or row == ROWS-1:
             piece.make_king()
             if piece.colour==WHITE:
-                self.white_king+=1
+                self.white_kings+=1
             else:
                 self.red_kings+=1
                 
